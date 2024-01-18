@@ -16,15 +16,18 @@ const app = initializeApp(firebaseConfig);
 
 // export Firebase Functions
 export const auth = getAuth(app);
-export const createUserWithEmailAndPassword_Fi = createUserWithEmailAndPassword();
-export const signInWithEmailAndPassword_Fi = signInWithEmailAndPassword();
-export const onAuthStateChanged_Fi = onAuthStateChanged();
-export const signOut_Fi = signOut();
+export const createUserWithEmailAndPassword_Fi = createUserWithEmailAndPassword;
+export const signInWithEmailAndPassword_Fi = signInWithEmailAndPassword;
+export const onAuthStateChanged_Fi = onAuthStateChanged;
+export const signOut_Fi = signOut;
 
 import { checkAuthState, userSignUp, userSignIn, userSignOut } from './auth.js';
 
 
 checkAuthState();
+userSignUp() 
+userSignIn() 
+userSignOut()
 
 const signUpButton = document.querySelector("#signUpButton");
 const signInButton = document.querySelector("#signInButton");

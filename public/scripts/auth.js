@@ -1,10 +1,18 @@
-import { auth,
-  createUserWithEmailAndPassword_Fi,
-  signInWithEmailAndPassword_Fi,
-  onAuthStateChanged_Fi,
-  signOut_Fi 
+import { auth, createUserWithEmailAndPassword_Fi, signInWithEmailAndPassword_Fi, onAuthStateChanged_Fi, signOut_Fi } from './app.js'
 
-} from './app.js'
+    export const checkAuthState = async() => {
+      onAuthStateChanged_Fi(auth, user => {
+          if(user) {
+              authForm.style.display = 'none';
+              secretContent.style.display = 'block';
+          }
+          else {
+              authForm.style.display = 'block';
+              secretContent.style.display = 'none';
+          }
+      })
+  }
+  
 
 
 const userEmail = document.querySelector("#userEmail");
@@ -47,22 +55,7 @@ export const userSignIn = async() => {
 }
 
 
+export const userSignOut = async() => {
+    await signOut_Fi(auth);
+}
 
-    export const checkAuthState = async() => {
-      onAuthStateChanged_Fi(auth, user => {
-          if(user) {
-              authForm.style.display = 'none';
-              secretContent.style.display = 'block';
-          }
-          else {
-              authForm.style.display = 'block';
-              secretContent.style.display = 'none';
-          }
-      })
-  }
-  
-export const userSignOut = async() =>  {
-    {
-      await signOut_Fi(auth);
-  }
-      };
