@@ -1,4 +1,6 @@
 
+// @ts-check
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDRRF1UhAWqgoEXgmrCDR0WIftbtw8Rp3c",
   authDomain: "fir-test-4b4a3.firebaseapp.com",

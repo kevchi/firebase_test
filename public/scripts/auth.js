@@ -1,59 +1,68 @@
-// @ts-check
+import { auth,
+  createUserWithEmailAndPassword_Fi,
+  signInWithEmailAndPassword_Fi,
+  onAuthStateChanged_Fi,
+  signOut_Fi 
 
-import { getAuth } from 'firebase/auth';
-import { httpsCallable } from 'firebase/functions';
-import { getFirestore } from 'firebase/firestore';
-import { getDocs } from 'firebase/firestore';
-import { openModal, closeModal } from './modals.js';
+} from './app.js'
 
-const auth = getAuth();
-const firestore = getFirestore(); // Access Firestore instance directly
 
-// Import the addAdminRole function from the functions/index.js file
-import { addAdminRole } from '../../functions/index.js';
+const userEmail = document.querySelector("#userEmail");
+const userPassword = document.querySelector("#userPassword");
+const authForm = document.querySelector("#authForm");
+const secretContent = document.querySelector("#secretContent");
 
-// Event listener for adding admin role
-const adminForm = document.querySelector('.admin-actions');
-adminForm.addEventListener('submit', (e) => {
-  e.preventDefault();
 
-  const adminEmail = document.querySelector('#admin-email').value;
-  const addAdminRoleFunction = httpsCallable(functions, 'addAdminRole');
-  addAdminRoleFunction({ email: adminEmail })
-    .then((result) => {
-      console.log(result);
-      // Add any necessary UI updates or feedback here
+secretContent.style.display = 'none';
+
+export const userSignUp = async() => {
+    const signUpEmail = userEmail.value;
+    const signUpPassword = userPassword.value;
+    createUserWithEmailAndPassword_Fi(auth, signUpEmail, signUpPassword)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        alert("Your account has been created!");
     })
     .catch((error) => {
-      console.error('Error adding admin role:', error);
-      // Handle errors appropriately, e.g., display error messages
-    });
-});
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode + errorMessage)
+    })
+}
 
-// Listen for authentication state changes
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    user.getIdTokenResult()
-      .then((idTokenResult) => {
-        user.admin = idTokenResult.claims.admin;
-        setupUI(user); // Call setupUI to configure UI based on user status
-      })
-      .catch((error) => {
-        console.error('Error getting ID token:', error);
-      });
+export const userSignIn = async() => {
+    const signInEmail = userEmail.value;
+    const signInPassword = userPassword.value;
+    signInWithEmailAndPassword_Fi(auth, signInEmail, signInPassword)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        alert("You have signed in successfully!");
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode + errorMessage)
+    })
+}
 
-    // Get guides from Firestore directly
-    getDocs(collection(firestore, 'guides'))
-      .then((snapshot) => {
-        setupGuides(snapshot.docs);
+
+
+    export const checkAuthState = async() => {
+      onAuthStateChanged_Fi(auth, user => {
+          if(user) {
+              authForm.style.display = 'none';
+              secretContent.style.display = 'block';
+          }
+          else {
+              authForm.style.display = 'block';
+              secretContent.style.display = 'none';
+          }
       })
-      .catch((error) => {
-        console.error('Error fetching guides:', error);
-      });
-  } else {
-    setupUI(); // Call setupUI for non-authenticated state
-    setupGuides([]);
   }
-});
-
-// ... (rest of the code remains the same)
+  
+export const userSignOut = async() =>  {
+    {
+      await signOut_Fi(auth);
+  }
+      };

@@ -1,152 +1,39 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-
-    <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
-
-    <script defer src="/__/firebase/10.7.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.7.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.7.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.7.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.7.1/firebase-storage-compat.js"></script>
-    <script defer src="../functions/index.js" type="module"></script>
-    <script defer src="./scripts/app.js" type="module"></script>
-    <script defer src="./scripts/auth.js" type="module"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="./index.css">
-  <title>Title</title>
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication is Fun</title>
+    <style>
+        body {text-align: center; background-color: lightseagreen; color: black;}
+    </style>
+    <!-- <link stylesheet="" src="./scripts/firebaseConfig.js"> -->
 </head>
-<body class="grey lighten-3">
-
-
-  <header class="z-depth-0">
-    <div class="container">
-      <a href="#" class="brand-logo">
-        <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
-      </a>
-      <nav id="navigation-links" class="hide-on-med-and-down">
-        <ul>
-          <li class="logged-in" id="account-link">
-            <a href="#" class=" modal-trigger" data-target="account-details-modal">Account</a>
-          </li>
-          <li class="logged-in" id="logout-link">
-            <a href="#" class="modal-trigger">Logout</a>
-          </li>
-          <li class="admin logged-in" id="create-guide-link">
-            <a href="#" class="modal-trigger" data-target="create-guide-modal">Create Guide</a>
-          </li>
-          <li class="logged-out" id="login-link">
-            <a href="#" class="modal-trigger" data-target="login-modal">Login</a>
-          </li>
-          <li class="logged-out" id="signup-link">
-            <a href="#" class="modal-trigger" data-target="signup-modal">Sign up</a>
-          </li>
-        </ul>
-      </nav>
+<body>
+    <section id="home"></section>
+    <section id="login"></section>
+    <section id="signUp"></section>
+    <section id="transactions">
+        <div id="addNewTrans"></div>
+        <div id="showTrans"></div>
+    </section>
+    <div id="authForm">
+        <h2>Sign Up or Sign In</h2>
+        <input type="email" placeholder="email" id="userEmail">
+        <input type="password" placeholder="password" id="userPassword">  
+        <br>
+        <br>
+        <button id="signUpButton">Sign Up</button>
+        <button id="signInButton">Sign In</button>
     </div>
-  </header>
 
-
-  <main>
-  <section id="admin-actions-modal" class="modal container">
-    <div class="modal-content">
-  <form class="center-align admin-actions admin" >
-    <input type="email" placeholder="User email" id="admin-email" required />
-    <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
-  </form>
+    <div id="secretContent">
+        <h3>This is top secret information that you can only see if</h3>
+        <h1>AUTHENTICATED</h1>
+        <button id="signOutButton">Sign Out</button>
     </div>
-  </section>
 
-
-<section id="signup-modal">
-  <div  id="modal-signup " class="modal">
-    <div class="modal-content">
-      <h4>Sign up</h4><br />
-      <form id="signup-form">
-        <div class="input-field">
-          <input type="email" id="signup-email" required />
-          <label for="signup-email">Email address</label>
-        </div>
-        <div class="input-field">
-          <input type="password" id="signup-password" required />
-          <label for="signup-password">Choose password</label>
-        </div>
-        <div class="input-field">
-          <input type="text" id="signup-bio" required />
-          <label for="signup-bio">One Line Bio</label>
-        </div>
-        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
-        <p class="error pink-text center-align"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
-
-<section id="login-modal">
-  <div id="modal-login" class="modal">
-    <div class="modal-content">
-      <h4>Login</h4><br />
-      <form id="login-form">
-        <div class="input-field">
-          <input type="email" id="login-email" required />
-          <label for="login-email">Email address</label>
-        </div>
-        <div class="input-field">
-          <input type="password" id="login-password" required />
-          <label for="login-password">Your password</label>
-        </div>
-        <button class="btn yellow darken-2 z-depth-0">Login</button>
-        <p class="error pink-text center-align"></p>
-      </form>
-    </div>
-  </div>
-</section>
-
-
-<section id="account-details-modal">
-  <div id="modal-account" class="modal">
-    <div class="modal-content center-align">
-      <h4>Account details</h4><br />
-      <div class="account-details"></div>
-    </div>
-  </div>
-  </section>
-
-
-<section id="create-guide-modal">
-  <div id="modal-create" class="modal">
-    <div class="modal-content">
-      <h4>Create Guide</h4><br />
-      <form id="create-form">
-        <div class="input-field">
-          <input type="text" id="title" required>
-          <label for="title">Guide Title</label>
-        </div>
-        <div class="input-field">
-          <textarea id="content" class="materialize-textarea" required></textarea>
-          <label for="content">Guide Content</label>
-        </div>
-        <button class="btn yellow darken-2 z-depth-0">Create</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-  <!-- GUIDE LIST -->
-  <section id="guide-list">
-  <div class="container" >
-    <ul class="collapsible z-depth-0 guides" >
-
-    </ul>
-  </div>
-</section>
-</main>
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
+<script type="module" src="./scripts/app.js"></script>
+</body>
 </html>
