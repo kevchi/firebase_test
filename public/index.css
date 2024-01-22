@@ -349,12 +349,15 @@ button {
     width: 450px;
     padding: 15px;
     padding-left: 10px;
-    background-color: #fff;
     border-radius: 10px;
     border: none;
     outline: none;
     font-size: 1.2rem;
     box-shadow: 0 5px 10px 0 rgb(0,0,0,0.25);
+}
+
+.transactionDetails input[type="submit"]{
+  background-color: #10cab8;
 }
 
 .transactionDetails select{
@@ -401,7 +404,6 @@ button {
   cursor:pointer;
   color:#333;
   position:relative;
-  z-index:2;
 }
 
 li:hover {
@@ -414,7 +416,7 @@ li:hover {
   overflow: hidden;
 }
 
-.signInBox {
+.log-in {
   top: 0;
   left: 0;
 }
@@ -425,3 +427,20 @@ li:hover {
   left: 450px;
 }
 
+/* CSS for transitions */
+.log-in, .register {
+  transition: left 0.5s ease-in-out;
+}
+
+.button-box h2 {
+  cursor: pointer; /* Optional: Changes the mouse pointer to indicate it's clickable */
+  transition: color 0.5s ease-in-out;
+}
+
+#nav-wrap {
+  display: none;
+}
+
+#transactions {
+  display: none;
+}
