@@ -1,5 +1,6 @@
 module.exports = {
   parserOptions: {
+    "ecmaVersion": 2018,
     "sourceType": "module",
   },
   env: {
@@ -21,7 +22,9 @@ module.exports = {
       env: {
         mocha: true,
       },
-      rules: {},
+      rules: {
+        "max-len": ["error", {"code": 120}],
+      },
     },
   ],
   globals: {},

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js"></script>
     <title>Authentication is Fun</title>
     <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
@@ -66,18 +64,22 @@
 <section  id="transactions">
 
 <div class="content">
-<!-- Add Neew Transaction -->
+<!-- Add New Transaction -->
 <form  class="transactionDetails">
     <!--       Vendor/Customer Name         -->
 <!-- <select name="" id="vendor"><option value="">-- Company/Person Name --</option></select> -->
     <!--       Debit / Credit         -->
 <!-- <select name="" id="transactionType"><option value="">-- Transaction Type --</option></select> -->
-<input type=""  class="" name="" placeholder="Company / Person Name (Vendor/Customer)">
-<input type=""  class="" name="" placeholder="Description">
-<select name="Transaction Type" ><option value="">Debit</option><option value="">Credit</option></select>
-<input type=""  class="" name="" placeholder="Amount">
+<input type="text" class="" name="companyPersonName" placeholder="Company or Person Name" required>
+<input type="text" class="" name="description" placeholder="Description" required>
+    <select name="transactionType" id="transactionType" required>
+    <option value="debit">Debit</option>
+    <option value="credit">Credit</option>
+    </select>
+<input type="number" class="" name="amount" placeholder="Amount" required>
 <!-- <input type=""  class="" name="" placeholder="Upload Receipt"> -->
 <input type="submit" id="submit" class="" value="Submit">
+<p class="error"></p>
 </form>
 </div>
 
@@ -89,7 +91,7 @@
 <li class="in">Pumpkin pie</li>
 </div>
 </section>
-
 <script type="module" src="./scripts/app.js"></script>
+<script type="module" src="./scripts/transactions.js"></script>
 </body>
 </html>
