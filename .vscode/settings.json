@@ -1,3 +1,7 @@
+// .vscode/settings.json
+
 {
-  "liveServer.settings.port": 5501
+  "liveServer.settings.root": "./public", // Serve files from the project root directory
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.port": 5501 // Optional: specify the browser to open
 }
